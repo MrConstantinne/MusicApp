@@ -51,4 +51,10 @@ export class TrackService {
         track.listens += 1;
         await track.save();
     }
+
+   async search(query: string): Promise<Track[]> {
+        return this.trackModel.find({
+            name: { $regex: new RegExp(query, 'i') }
+        });
+    }
 }
